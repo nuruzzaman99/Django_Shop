@@ -1,0 +1,89 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>SignUp</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+		<!-- Custom Theme files -->
+		<link href="{% static 'css/style_reg.css' %}" rel="stylesheet" type="text/css" media="all" />
+		<!-- //Custom Theme files -->
+		<!-- web font -->
+		<link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
+		<!-- //web font -->
+		{% include 'head.html' %}
+	</head>
+	<body>
+		{% include "topbar.html" %}
+		<!-- main -->
+		<div class="main-w3layouts wrapper">
+			<h1>SignIn Here</h1>
+			<div class="main-agileinfo">
+				<div class="agileits-top">
+					<form action="signin" method="post">
+						{% csrf_token %}
+						<input class="text" type="text" name="username" placeholder="Username" required="">
+						<br>
+						<input class="text" type="password" name="password" placeholder="Password" required="">
+						<br>
+						<input type="submit" value="SignIn">
+					</form>
+					<div class="form-group d-md-flex">
+						<div class="w-50" style="color: #000000">
+							<label class="checkbox-wrap checkbox-primary"> Remember Me <input type="checkbox" checked><span class="checkmark"></span>
+							</label>
+						</div>
+						<div class="w-50 text-md-right">
+							<a href="#" style="color: #000000"> Forgot Password</a>
+						</div>
+					</div>
+					<p>Don't have an Account? <a href="registration"> Create Account!</a></p>
+				</div>
+				<p class="w-100 text-center" style="color: #000000">&mdash; Or Sign In With &mdash;</p>
+				<center>
+					<a href="#" class="px-2 py-2 mr-md-1 rounded" style="color: #f5f5dc"><span class="ion-logo-facebook mr-2"></span> Facebook</a>
+					<a href="#" class="px-2 py-2 ml-md-1 rounded" style="color: #f5f5dc"><span class="ion-logo-twitter mr-2"></span> Twitter</a>
+				</center>
+			</div>
+			<ul class="colorlib-bubbles">
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</div>
+		<!-- //main -->
+		{% include 'footer.html' %}
+	</body>
+</html>
+

@@ -13,3 +13,7 @@ def index(request):
     categories = category.objects.all()
 
     return render(request, 'index.html', {'item' : item, 'categories' : categories})
+
+def shop(request):
+    
+    return render(request, 'shop.html')

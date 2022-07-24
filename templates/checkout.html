@@ -1,4 +1,5 @@
 {% load static %}
+{% load cart %}
 {% include "head.html" %}
 
 <body>
@@ -7,6 +8,95 @@
     {% include 'pageHeader.html' %}
 
 
+    <!-- Checkout Start -->
+    <div class="container-fluid pt-5">
+        <form action='' class="row px-xl-5" method='POST'>
+            {% csrf_token %}
+            <div class="col-lg-8">
+                <div class="mb-4">
+                    <h4 class="font-weight-semi-bold mb-4">Billing Address</h4>
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <label>Name</label>
+                            <input class="form-control" type="text" name='name' placeholder="Md Naeem" value='{{user.first_name}}'>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>E-mail</label>
+                            <input class="form-control" type="text" name='email' placeholder="example@email.com" value='{{user.email}}'>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Mobile No</label>
+                            <input class="form-control" type="text" name='phone' placeholder="+880 1456 789385">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Address</label>
+                            <input class="form-control" type="text" name='address' placeholder="Road# House# Block#">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>City</label>
+                            <input class="form-control" type="text" name='city' placeholder="Dhaka">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>ZIP Code</label>
+                            <input class="form-control" type="text" name='zipcode' placeholder="Dhaka-1216">
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 form-group">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="newaccount">
+                            <label class="custom-control-label" for="newaccount">Create an account</label>
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-group">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="shipto">
+                            <label class="custom-control-label" for="shipto"  data-toggle="collapse" data-target="#shipping-address">Ship to different address</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="collapse mb-4" id="shipping-address">
+                    <h4 class="font-weight-semi-bold mb-4">Shipping Address</h4>
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <label>Name</label>
+                            <input class="form-control" type="text" placeholder="Md Naeem">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>E-mail</label>
+                            <input class="form-control" type="text" placeholder="example@email.com">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Mobile No</label>
+                            <input class="form-control" type="text" placeholder="+880 1456 789385">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Address</label>
+                            <input class="form-control" type="text" placeholder="Road# House# Block#">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>City</label>
+                            <input class="form-control" type="text" placeholder="Dhaka">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>ZIP Code</label>
+                            <input class="form-control" type="text" placeholder="Dhaka-1216">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% if item|is_empty:request.session.cart %}
+            <!-- Billing start -->
+            {% include 'billing.html' %}
+            <div class="card-footer border-secondary bg-transparent">
+                <button type='submit' class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3 text-dark">Place Order</button>
+            </div>
+            {% endif %}
+        </form>
+    </div>
+</div>
+
+    <!-- Checkout End -->
 
     {% include 'vendors.html' %}
 

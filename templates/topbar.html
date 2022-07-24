@@ -1,5 +1,7 @@
 {% block topbar %}
 {% load static %}
+{% load cart %}
+{% include "head.html" %}
 <!-- Topbar Start -->
 <div class="container-fluid">
     <div class="row bg-secondary py-2 px-xl-5">
@@ -55,9 +57,9 @@
                 <i class="fas fa-heart text-primary"></i>
                 <span class="badge">5</span>
             </a>
-            <a href="" class="btn border">
+            <a href="{% url 'cart' %}" class="btn border">
                 <i class="fas fa-shopping-cart text-primary"></i>
-                <span class="badge">0</span>
+                <span class="badge">{{request.session.cart}}</span>
             </a>
             {% if user.is_authenticated %}
             <a href="" class="btn border">

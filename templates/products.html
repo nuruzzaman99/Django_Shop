@@ -1,13 +1,15 @@
 {% block products %}
 {% load static %}
+{% load cart %}
 {% static 'img' as baseUrl %}
+
 <!-- Products Start -->
 <div class="container-fluid pt-5">
     <div class="row px-xl-5 pb-3">
         
         {% for items in item %}
 
-        <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+        <div class="col-lg-3 col-md-6 col-sm-12 pb-1" id={{items.id}}>
             <div class="card product-item border-0 mb-4">
                 <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
                     <img class="img-fluid w-100" src="{{items.img.url}}" alt="">
@@ -18,17 +20,47 @@
                         <h6><b>BDT {{items.offerprice}}</b></h6><h6 class="text-muted ml-2"><del>BDT {{items.price}}</del></h6>
                     </div>
                 </div>
+                {% if items|is_in_cart:request.session.cart %}
                 <div class="card-footer d-flex justify-content-between bg-light border">
-                    <form action="/" method = "POST">
+                    <form action="/#{{items.id}}" method = "POST">
                         {% csrf_token %}
-                        <input hidden type='text' name = 'product' value = '{{items.id}}'>
-                        <i class="fas fa-eye text-primary mr-1"></i><input type='submit' class="btn btn-sm text-dark p-0" value='Details'>
+                        <input hidden type='text' name = 'items' value = '{{items.id}}'>
+                        <input hidden type='text' name = 'remove' value = 'True'>
+                        <a href="">
+                            <button type="submit" id = 'remove' class="btn btn-sm text-dark p-0">
+                                <i class="fas fa-minus text-primary mr-1"></i>
+                            </button>
+                        </a>
                     </form>
 
+                    <div class="text-center text-dark p-0">
+                        {{items|cart_quantity:request.session.cart}} in cart
+                    </div>
 
-                    
-                    <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
+                    <form action="/#{{items.id}}" method = "POST">
+                        {% csrf_token %}
+                        <input hidden type='text' name = 'items' value = '{{items.id}}'>
+                        <a href="">
+                            <button type="submit" class="btn btn-sm text-dark p-0">
+                                <i class="fas fa-plus text-primary mr-1"></i>
+                            </button>
+                        </a>
+                    </form>
                 </div>
+                {% else %}
+                <form action="/#{{items.id}}" method = "POST">
+                    {% csrf_token %}
+                    <input hidden type='text' name = 'items' value = '{{items.id}}'>
+
+                    <div class="card-footer d-flex justify-content-between bg-light border">
+                        <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>Details</a>
+                        <a href="">
+                            <i class="fas fa-shopping-cart text-primary mr-1"></i>
+                            <input type='submit' class="btn btn-sm text-dark p-0" value='Add To Cart'>
+                        </a>
+                    </div>
+                </form>
+                {% endif %}
             </div>
         </div>
         {% endfor %}

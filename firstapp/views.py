@@ -44,12 +44,22 @@ class index(View):
         if category_id:
             item = items.objects.filter(cat = category_id)
             return render(request, 'shop.html', {'name' : 'Our Shop', 'item' : item, 'categories' : categories})
+        
+        item_id = request.GET.get('items')
+        if item_id:
+            item = items.objects.filter(id = item_id)
+            return render(request, 'shopDetails.html', {'name' : 'Shop Details', 'item' : item, 'categories' : categories})
 
         return render(request, 'index.html', {'item' : item, 'categories' : categories})
 
 def shop(request):
     item = items.objects.all()
     categories = category.objects.all()
+
+    item_id = request.GET.get('items')
+    if item_id:
+        item = items.objects.filter(id = item_id)
+        return render(request, 'shopDetails.html', {'name' : 'Shop Details', 'item' : item, 'categories' : categories})
 
     return render(request, 'shop.html', {'name' : 'Our Shop', 'item' : item, 'categories' : categories})
 
